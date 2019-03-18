@@ -7,14 +7,17 @@ import { MaterialModule } from './modules/material.module';
 
 import { AppComponent } from './app.component';
 import { DashboardComponent } from './routes/admin/dashboard/dashboard.component';
+import { NavComponent } from './routes/_partials/nav/nav.component';
+import { LayoutModule } from '@angular/cdk/layout';
 
 @NgModule({
-  declarations: [AppComponent, DashboardComponent],
+  declarations: [AppComponent, DashboardComponent, NavComponent],
   imports: [
     BrowserModule,
     BrowserAnimationsModule,
     AppRoutingModule,
-    MaterialModule
+    MaterialModule,
+    LayoutModule
   ],
   providers: [],
   bootstrap: [AppComponent]

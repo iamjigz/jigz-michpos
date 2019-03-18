@@ -1,4 +1,6 @@
-# JigzMichpos
+# MichPOS
+
+[![Netlify Status](https://api.netlify.com/api/v1/badges/39452c1f-5237-4981-af00-0d3d6ec1bcd0/deploy-status)](https://app.netlify.com/sites/michpos/deploys)
 
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 7.3.6.
 

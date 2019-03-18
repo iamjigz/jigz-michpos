@@ -1,6 +1,7 @@
 import { NgModule } from '@angular/core';
 import { CdkTableModule } from '@angular/cdk/table';
 import { MatSidenavModule } from '@angular/material/sidenav';
+import { MatToolbarModule } from '@angular/material/toolbar';
 import {
   MatAutocompleteModule,
   MatButtonModule,
@@ -29,7 +30,6 @@ import {
   MatSortModule,
   MatTableModule,
   MatTabsModule,
-  MatToolbarModule,
   MatTooltipModule,
   MatStepperModule
 } from '@angular/material';

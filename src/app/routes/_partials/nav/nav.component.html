@@ -11,7 +11,12 @@
     <mat-toolbar color="primary">Menu</mat-toolbar>
     <mat-nav-list click="closeSidenav()">
       <div *ngFor="let menu of sideMenu">
-        <a mat-list-item [routerLink]="menu.path">
+        <a
+          mat-list-item
+          [routerLink]="menu.path"
+          routerLinkActive="active"
+          [routerLinkActiveOptions]="{ exact: true }"
+        >
           <span>{{ menu.title }}</span>
           <div class="spacer"></div>
           <mat-icon>{{ menu.icon }}</mat-icon>

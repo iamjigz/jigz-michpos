@@ -4,14 +4,22 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 import { AppRoutingModule } from './app-routing.module';
 import { MaterialModule } from './modules/material.module';
+import { LayoutModule } from '@angular/cdk/layout';
 
 import { AppComponent } from './app.component';
 import { DashboardComponent } from './routes/admin/dashboard/dashboard.component';
 import { NavComponent } from './routes/_partials/nav/nav.component';
-import { LayoutModule } from '@angular/cdk/layout';
+import { TableComponent } from './routes/inventory/table/table.component';
+import { InventoryComponent } from './routes/inventory/inventory.component';
 
 @NgModule({
-  declarations: [AppComponent, DashboardComponent, NavComponent],
+  declarations: [
+    AppComponent,
+    DashboardComponent,
+    NavComponent,
+    TableComponent,
+    InventoryComponent
+  ],
   imports: [
     BrowserModule,
     BrowserAnimationsModule,

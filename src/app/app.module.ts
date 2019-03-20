@@ -9,6 +9,7 @@ import { AngularFireModule } from '@angular/fire';
 import { FlexLayoutModule } from '@angular/flex-layout';
 
 import { AppComponent } from './app.component';
+import { LoginComponent } from './routes/login/login.component';
 import { DashboardComponent } from './routes/admin/dashboard/dashboard.component';
 import { NavComponent } from './routes/_partials/nav/nav.component';
 import { TableComponent } from './routes/inventory/table/table.component';
@@ -22,7 +23,8 @@ import { environment } from './../environments/environment';
     DashboardComponent,
     NavComponent,
     TableComponent,
-    InventoryComponent
+    InventoryComponent,
+    LoginComponent
   ],
   imports: [
     BrowserModule,

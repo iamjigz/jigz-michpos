@@ -1,4 +1,5 @@
 import { Injectable } from '@angular/core';
+import { Router } from '@angular/router';
 import * as firebase from 'firebase/app';
 import { AngularFireAuth } from '@angular/fire/auth';
 import {
@@ -20,6 +21,7 @@ export class AuthService {
   constructor(
     private afAuth: AngularFireAuth,
     private afs: AngularFirestore,
+    private route: Router,
     public snackBar: SnackbarService
   ) {
     //// Get auth data, then get firestore user document || null
@@ -61,7 +63,8 @@ export class AuthService {
   signOut() {
     this.afAuth.auth
       .signOut()
-      .then(() => this.snackBar.show('You have been logged out!', 'OK'));
+      .then(() => this.snackBar.show('You have been logged out!', 'OK'))
+      .then(() => this.route.navigate(['/']));
   }
 
   private updateUserData(user) {
@@ -71,8 +74,8 @@ export class AuthService {
     );
     const data: User = {
       uid: user.uid,
-      firstName: user.firstName,
-      lastName: user.lastName,
+      firstName: user.firstName || 'Guest',
+      lastName: user.lastName || 'User',
       email: user.email,
       roles: {
         subscriber: true

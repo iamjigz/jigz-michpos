@@ -4,6 +4,7 @@ import { LayoutModule } from '@angular/cdk/layout';
 import { MatSidenavModule } from '@angular/material/sidenav';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
+import { MatTableModule } from '@angular/material/table';
 
 import {
   MatAutocompleteModule,
@@ -30,7 +31,6 @@ import {
   MatSliderModule,
   MatSlideToggleModule,
   MatSortModule,
-  MatTableModule,
   MatTabsModule,
   MatTooltipModule,
   MatStepperModule

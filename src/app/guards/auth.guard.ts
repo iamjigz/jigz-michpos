@@ -27,9 +27,9 @@ export class AuthGuard implements CanActivate {
   ): Observable<boolean> {
     return this.auth.user$.pipe(
       take(1),
-      map(user => (user && user.roles.admin ? true : false)),
-      tap(isAdmin => {
-        if (!isAdmin) {
+      map(user => (user && this.auth.canRead(user) ? true : false)),
+      tap(canView => {
+        if (!canView) {
           this.snackBar.show('You have to log in to continue.', 'OK');
           this.route.navigate(['login']);
         }

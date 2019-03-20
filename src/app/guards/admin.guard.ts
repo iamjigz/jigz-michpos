@@ -22,9 +22,9 @@ export class AdminGuard implements CanActivate {
   ): Observable<boolean> {
     return this.auth.user$.pipe(
       take(1),
-      map(user => (user && this.auth.canRead(user) ? true : false)),
-      tap(canView => {
-        if (!canView) {
+      map(user => (user && user.roles.admin ? true : false)),
+      tap(isAdmin => {
+        if (!isAdmin) {
           this.snackBar.show(
             'You do not have enough permissions to access this.',
             'OK'

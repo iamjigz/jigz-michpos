@@ -9,7 +9,7 @@ import { map } from 'rxjs/operators';
   styleUrls: ['./nav.component.css']
 })
 export class NavComponent {
-  title = 'MichPOS';
+  title = `ST. ILLIAN's Pharmacy`;
   sideMenu = [
     { path: '/', title: 'Home', icon: 'home' },
     { path: '/dashboard', title: 'Dashboard', icon: 'dashboard' },

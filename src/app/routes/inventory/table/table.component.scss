@@ -1,0 +1,22 @@
+table {
+  width: 100%;
+}
+
+.mat-form-field {
+  font-size: 14px;
+  width: 100%;
+}
+
+.mat-cell,
+.mat-header-cell {
+  overflow: hidden;
+  word-wrap: break-word;
+}
+
+.mat-footer-row {
+  font-weight: bold;
+}
+
+.second-footer-row td {
+  color: #900000;
+}

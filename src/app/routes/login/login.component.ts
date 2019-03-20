@@ -1,6 +1,7 @@
 import { Component, AfterViewInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
+import { MatSnackBar } from '@angular/material';
 
 import { AuthService } from '../../services/auth.service';
 
@@ -19,7 +20,8 @@ export class LoginComponent implements AfterViewInit {
   constructor(
     private auth: AuthService,
     private fb: FormBuilder,
-    private router: Router
+    private router: Router,
+    private snackBar: MatSnackBar
   ) {}
 
   ngAfterViewInit() {
@@ -37,9 +39,15 @@ export class LoginComponent implements AfterViewInit {
     this.auth
       .login(this.email, this.password)
       .then(res => {
-        console.log('You\'ve logged in', res);
+        this.snackBar.open(`You've successfuly logged in.`, 'OK', {
+          duration: 5000
+        });
         this.router.navigate(['/']);
       })
-      .catch(err => console.log(err));
+      .catch(err => {
+        this.snackBar.open(err.message, 'OK', {
+          duration: 5000
+        });
+      });
   }
 }

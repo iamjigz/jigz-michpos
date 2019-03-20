@@ -5,6 +5,9 @@ import { LoginComponent } from './routes/login/login.component';
 import { DashboardComponent } from './routes/admin/dashboard/dashboard.component';
 import { InventoryComponent } from './routes/inventory/inventory.component';
 
+import { AuthGuard } from './guards/auth.guard';
+import { AdminGuard } from './guards/admin.guard';
+
 const routes: Routes = [
   {
     path: 'login',
@@ -12,11 +15,13 @@ const routes: Routes = [
   },
   {
     path: 'dashboard',
-    component: DashboardComponent
+    component: DashboardComponent,
+    canActivate: [AuthGuard, AdminGuard]
   },
   {
     path: 'inventory',
-    component: InventoryComponent
+    component: InventoryComponent,
+    canActivate: [AuthGuard]
   }
 ];
 

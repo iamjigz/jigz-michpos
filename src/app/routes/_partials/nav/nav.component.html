@@ -39,9 +39,11 @@
         <mat-icon aria-label="Side nav toggle icon">menu</mat-icon>
       </button>
 
-      <button mat-stroked-button routerLink="/">
-        <span>{{ title }}</span>
-      </button>
+      <div fxHide fxShow.gt-sm>
+        <button mat-stroked-button routerLink="/">
+          <span>{{ title }}</span>
+        </button>
+      </div>
 
       <div class="spacer"></div>
 
@@ -71,15 +73,15 @@
 <ng-template #guest>
   <button mat-stroked-button routerLink="/login">
     <mat-icon>account_box</mat-icon>
-    <span>Login</span>
+    <span fxHide fxShow.gt-sm>Login</span>
   </button>
 </ng-template>
 
 <ng-template #authenticated>
   <div *ngIf="(auth.user$ | async) as user">
-    <button mat-stroked-button [matMenuTriggerFor]="userActions">
-      <mat-icon>account_box</mat-icon>
-      {{ user.firstName }} {{ user.lastName }}
+    <button color="accent" mat-stroked-button [matMenuTriggerFor]="userActions">
+      <mat-icon>verified_user</mat-icon>
+      <span fxHide fxShow.gt-sm>{{ user.firstName }} {{ user.lastName }}</span>
     </button>
 
     <mat-menu #userActions="matMenu">

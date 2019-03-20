@@ -1,5 +1,6 @@
 import { NgModule } from '@angular/core';
 import { CdkTableModule } from '@angular/cdk/table';
+import { LayoutModule } from '@angular/cdk/layout';
 import { MatSidenavModule } from '@angular/material/sidenav';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import {
@@ -36,6 +37,7 @@ import {
 
 const modules = [
   CdkTableModule,
+  LayoutModule,
   MatAutocompleteModule,
   MatButtonModule,
   MatButtonToggleModule,

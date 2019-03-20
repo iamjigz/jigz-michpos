@@ -4,13 +4,17 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 import { AppRoutingModule } from './app-routing.module';
 import { MaterialModule } from './modules/material.module';
-import { LayoutModule } from '@angular/cdk/layout';
+import { FirebaseModule } from './modules/firebase.module';
+import { AngularFireModule } from '@angular/fire';
+import { FlexLayoutModule } from '@angular/flex-layout';
 
 import { AppComponent } from './app.component';
 import { DashboardComponent } from './routes/admin/dashboard/dashboard.component';
 import { NavComponent } from './routes/_partials/nav/nav.component';
 import { TableComponent } from './routes/inventory/table/table.component';
 import { InventoryComponent } from './routes/inventory/inventory.component';
+
+import { environment } from './../environments/environment';
 
 @NgModule({
   declarations: [
@@ -25,7 +29,9 @@ import { InventoryComponent } from './routes/inventory/inventory.component';
     BrowserAnimationsModule,
     AppRoutingModule,
     MaterialModule,
-    LayoutModule
+    FirebaseModule,
+    FlexLayoutModule,
+    AngularFireModule.initializeApp(environment.firebase)
   ],
   providers: [],
   bootstrap: [AppComponent]

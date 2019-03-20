@@ -11,6 +11,7 @@ import { FlexLayoutModule } from '@angular/flex-layout';
 
 import { AppComponent } from './app.component';
 import { LoginComponent } from './routes/login/login.component';
+import { HomeComponent } from './routes/home/home.component';
 import { DashboardComponent } from './routes/admin/dashboard/dashboard.component';
 import { NavComponent } from './routes/_partials/nav/nav.component';
 import { TableComponent } from './routes/inventory/table/table.component';
@@ -25,7 +26,8 @@ import { environment } from './../environments/environment';
     NavComponent,
     TableComponent,
     InventoryComponent,
-    LoginComponent
+    LoginComponent,
+    HomeComponent
   ],
   imports: [
     BrowserModule,

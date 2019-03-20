@@ -45,13 +45,14 @@
 
       <div class="spacer"></div>
 
-      <button mat-icon-button>
-        <mat-icon>notifications</mat-icon>
-      </button>
+      <div *ngIf="(auth.user$ | async); then authenticated; else guest">
+        <!-- template will replace this div -->
+      </div>
 
       <button mat-icon-button [matMenuTriggerFor]="menu">
         <mat-icon>more_vert</mat-icon>
       </button>
+
       <mat-menu #menu="matMenu">
         <button mat-menu-item>
           <mat-icon>notifications_off</mat-icon>
@@ -66,3 +67,31 @@
     </main>
   </mat-sidenav-content>
 </mat-sidenav-container>
+
+<ng-template #guest>
+  <button mat-stroked-button routerLink="/login">
+    <mat-icon>account_box</mat-icon>
+    <span>Login</span>
+  </button>
+</ng-template>
+
+<ng-template #authenticated>
+  <div *ngIf="(auth.user$ | async) as user">
+    <button mat-stroked-button [matMenuTriggerFor]="userActions">
+      <mat-icon>account_box</mat-icon>
+      {{ user.firstName }} {{ user.lastName }}
+    </button>
+
+    <mat-menu #userActions="matMenu">
+      <div *ngIf="(auth.user$ | async)">
+        <button mat-menu-item routerLink="/profile">
+          <span>Profile</span>
+        </button>
+
+        <button mat-menu-item (click)="logout()">
+          <span>Logout</span>
+        </button>
+      </div>
+    </mat-menu>
+  </div>
+</ng-template>

@@ -70,9 +70,13 @@ export class AuthService {
     );
     const data: User = {
       uid: user.uid,
-      firstName: user.firstName || 'Guest',
-      lastName: user.lastName || 'User',
+      firstName: user.firstName ? user.firstName : 'Guest',
+      lastName: user.lastName ? user.lastName : 'User',
+      displayName: user.displayName
+        ? user.displayName
+        : `${user.firstName} ${user.lastName}`,
       email: user.email,
+      photoURL: user.photoURL ? user.photoURL : '',
       roles: {
         subscriber: true
       }

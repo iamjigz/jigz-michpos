@@ -311,9 +311,20 @@
         required
       />
     </div>
-    <div class="inputGroup inputGroup3">
-      <button id="login" type="submit" [disabled]="loginForm.invalid">
+    <div class="inputGroup inputGroup3" fxLayoutAlign="space-evenly center">
+      <button
+        mat-raised-button
+        color="primary"
+        id="login"
+        type="submit"
+        [disabled]="loginForm.invalid"
+      >
         Log in
+      </button>
+
+      <button mat-raised-button color="accent" (click)="googleLogin()">
+        <fa-icon [icon]="['fab', 'google']"></fa-icon>
+        Sign-in with Google
       </button>
     </div>
   </form>

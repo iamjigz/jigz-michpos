@@ -50,4 +50,20 @@ export class LoginComponent implements AfterViewInit {
         });
       });
   }
+
+  googleLogin() {
+    this.auth
+      .googleLogin()
+      .then(res => {
+        this.snackBar.open(`You've successfuly logged in.`, 'OK', {
+          duration: 5000
+        });
+        this.router.navigate(['/']);
+      })
+      .catch(err => {
+        this.snackBar.open(err.message, 'OK', {
+          duration: 5000
+        });
+      });
+  }
 }

@@ -90,8 +90,13 @@
           <span>Profile</span>
         </button>
 
-        <button mat-menu-item (click)="logout()">
+        <button
+          mat-menu-item
+          (click)="logout()"
+          fxLayoutAlign="space-evenly center"
+        >
           <span>Logout</span>
+          <fa-icon icon="sign-out-alt"></fa-icon>
         </button>
       </div>
     </mat-menu>

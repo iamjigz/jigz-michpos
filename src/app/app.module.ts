@@ -8,6 +8,9 @@ import { MaterialModule } from './modules/material.module';
 import { FirebaseModule } from './modules/firebase.module';
 import { AngularFireModule } from '@angular/fire';
 import { FlexLayoutModule } from '@angular/flex-layout';
+import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
+import { library } from '@fortawesome/fontawesome-svg-core';
+import { fas } from '@fortawesome/free-solid-svg-icons';
 
 import { AppComponent } from './app.component';
 import { LoginComponent } from './routes/login/login.component';
@@ -18,6 +21,8 @@ import { TableComponent } from './routes/inventory/table/table.component';
 import { InventoryComponent } from './routes/inventory/inventory.component';
 
 import { environment } from './../environments/environment';
+
+library.add(fas);
 
 @NgModule({
   declarations: [
@@ -38,6 +43,7 @@ import { environment } from './../environments/environment';
     MaterialModule,
     FirebaseModule,
     FlexLayoutModule,
+    FontAwesomeModule,
     AngularFireModule.initializeApp(environment.firebase)
   ],
   providers: [],

@@ -5,10 +5,7 @@ import { map } from 'rxjs/operators';
 
 import { AuthService } from './../../../services/auth.service';
 import { SnackbarService } from './../../../services/snackbar.service';
-<<<<<<< HEAD
-=======
 import { User } from 'src/app/models/user';
->>>>>>> dev
 
 @Component({
   selector: 'app-nav',
@@ -39,8 +36,6 @@ export class NavComponent {
   logout() {
     return this.auth.signOut();
   }
-<<<<<<< HEAD
-=======
 
   checkRole(user: User) {
     return this.auth.canDelete(user)
@@ -49,5 +44,4 @@ export class NavComponent {
       ? 'Editor'
       : 'Subscriber';
   }
->>>>>>> dev
 }

@@ -6,6 +6,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { AppRoutingModule } from './app-routing.module';
 import { MaterialModule } from './modules/material.module';
 import { FirebaseModule } from './modules/firebase.module';
+import { FontawesomeModule } from './modules/fontawesome.module';
 import { AngularFireModule } from '@angular/fire';
 import { FlexLayoutModule } from '@angular/flex-layout';
 
@@ -38,7 +39,9 @@ import { environment } from './../environments/environment';
     MaterialModule,
     FirebaseModule,
     FlexLayoutModule,
-    AngularFireModule.initializeApp(environment.firebase)
+    FontawesomeModule,
+    AngularFireModule.initializeApp(environment.firebase),
+    FontawesomeModule
   ],
   providers: [],
   bootstrap: [AppComponent]

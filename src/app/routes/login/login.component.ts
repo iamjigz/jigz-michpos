@@ -1,8 +1,8 @@
 import { Component, AfterViewInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
-import { MatSnackBar } from '@angular/material';
 
+import { SnackbarService } from '../../services/snackbar.service';
 import { AuthService } from '../../services/auth.service';
 
 import '../../../assets/login-animation.js';
@@ -21,7 +21,7 @@ export class LoginComponent implements AfterViewInit {
     private auth: AuthService,
     private fb: FormBuilder,
     private router: Router,
-    private snackBar: MatSnackBar
+    private snackBar: SnackbarService
   ) {}
 
   ngAfterViewInit() {
@@ -34,20 +34,14 @@ export class LoginComponent implements AfterViewInit {
   }
 
   login() {
-    // console.log(`email: ${this.email} password: ${this.password}`);
-    // alert(`Email: ${this.email} Password: ${this.password}`);
     this.auth
       .login(this.email, this.password)
       .then(res => {
-        this.snackBar.open(`You've successfuly logged in.`, 'OK', {
-          duration: 5000
-        });
+        this.snackBar.show(`You've successfuly logged in.`, 'OK');
         this.router.navigate(['/']);
       })
       .catch(err => {
-        this.snackBar.open(err.message, 'OK', {
-          duration: 5000
-        });
+        this.snackBar.show(err.message, 'OK');
       });
   }
 
@@ -55,15 +49,11 @@ export class LoginComponent implements AfterViewInit {
     this.auth
       .googleLogin()
       .then(res => {
-        this.snackBar.open(`You've successfuly logged in.`, 'OK', {
-          duration: 5000
-        });
+        this.snackBar.show(`You've successfuly logged in.`, 'OK');
         this.router.navigate(['/']);
       })
       .catch(err => {
-        this.snackBar.open(err.message, 'OK', {
-          duration: 5000
-        });
+        this.snackBar.show(err.message, 'OK');
       });
   }
 }

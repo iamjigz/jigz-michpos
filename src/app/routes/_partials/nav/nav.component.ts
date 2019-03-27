@@ -13,10 +13,9 @@ import { User } from 'src/app/models/user';
   styleUrls: ['./nav.component.scss']
 })
 export class NavComponent {
-  title = `ST. ILLIAN's Pharmacy`;
+  title = `ST. ILIAN's Pharmacy`;
   sideMenu = [
     { path: '/', title: 'Home', icon: 'home' },
-    { path: '/profile', title: 'Profile', icon: 'account_circle' },
     { path: '/dashboard', title: 'Dashboard', icon: 'dashboard' },
     { path: '/reports', title: 'Reports', icon: 'assignment' },
     { path: '/transactions', title: 'Transactions', icon: 'list' },

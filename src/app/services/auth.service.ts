@@ -46,7 +46,10 @@ export class AuthService {
     return new Promise((resolve, reject) => {
       this.afAuth.auth
         .signInWithEmailAndPassword(email, password)
-        .then(userData => resolve(userData), err => reject(err));
+        .then(
+          userData => resolve(this.updateUserData(userData.user)),
+          err => reject(err)
+        );
     });
   }
 
@@ -70,13 +73,7 @@ export class AuthService {
     );
     const data: User = {
       uid: user.uid,
-      firstName: user.firstName ? user.firstName : 'Guest',
-      lastName: user.lastName ? user.lastName : 'User',
-      displayName: user.displayName
-        ? user.displayName
-        : `${user.firstName} ${user.lastName}`,
       email: user.email,
-      photoURL: user.photoURL ? user.photoURL : '',
       roles: {
         subscriber: true
       }

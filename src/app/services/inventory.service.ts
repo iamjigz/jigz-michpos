@@ -15,7 +15,7 @@ export class InventoryService {
   products$: Observable<Product[]>;
 
   constructor(private afs: AngularFirestore) {
-    this.productCollection = afs.collection<Product>('products');
+    this.productCollection = afs.collection<Product>('inventory');
     this.products$ = this.productCollection.valueChanges();
   }
 

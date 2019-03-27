@@ -10,14 +10,6 @@
   >
     <mat-toolbar color="primary">Menu</mat-toolbar>
     <mat-nav-list click="closeSidenav()">
-      <mat-card *ngIf="(auth.user$ | async) as user">
-        <mat-card-header>
-          <img mat-card-avatar [src]="user.photoURL" />
-          <mat-card-title>{{ user.displayName }}</mat-card-title>
-          <mat-card-subtitle>{{ checkRole(user) }}</mat-card-subtitle>
-        </mat-card-header>
-      </mat-card>
-
       <div *ngFor="let menu of sideMenu">
         <a
           mat-list-item
@@ -81,39 +73,22 @@
 <ng-template #guest>
   <button mat-stroked-button routerLink="/login">
     <mat-icon>account_box</mat-icon>
-    <span fxHide fxShow.gt-sm>Login</span>
+    Login
   </button>
 </ng-template>
 
 <ng-template #authenticated>
   <div *ngIf="(auth.user$ | async) as user" fxLayoutAlign="start start">
-    <button mat-button color="accent" [matMenuTriggerFor]="userActions">
-      <mat-list>
-        <mat-list-item>
-          <img matListAvatar [src]="user.photoURL" />
-          <h3 matLine fxHide fxShow.gt-sm>{{ user.displayName }}</h3>
-        </mat-list-item>
-      </mat-list>
+    <button mat-stroked-button [matMenuTriggerFor]="userActions">
+      <mat-icon>account_circle</mat-icon>
+      {{ user.email }}
     </button>
 
     <mat-menu #userActions="matMenu">
       <div *ngIf="(auth.user$ | async)">
-        <button
-          mat-menu-item
-          routerLink="/profile"
-          fxLayoutAlign="space-evenly center"
-        >
-          <span>Profile</span>
-          <fa-icon icon="user"></fa-icon>
-        </button>
-
-        <button
-          mat-menu-item
-          (click)="logout()"
-          fxLayoutAlign="space-evenly center"
-        >
-          <span>Logout</span>
+        <button mat-menu-item (click)="logout()">
           <fa-icon icon="sign-out-alt"></fa-icon>
+          Logout
         </button>
       </div>
     </mat-menu>

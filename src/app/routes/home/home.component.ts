@@ -14,11 +14,6 @@ import { Product } from './../../models/product';
 export class HomeComponent implements OnInit {
   products$: Observable<Product[]>;
   product: Product;
-  productForm = new FormGroup({
-    name: new FormControl(''),
-    stock: new FormControl(''),
-    sellPrice: new FormControl('')
-  });
   constructor(
     public invService: InventoryService,
     public snackBar: SnackbarService
@@ -29,9 +24,8 @@ export class HomeComponent implements OnInit {
   }
 
   onSubmit() {
-    console.log(this.productForm.value);
-    this.invService.addProduct(this.productForm.value).then(res => {
-      this.snackBar.show(`You've added to the inventory.`, 'OK');
-    });
+    // this.invService.addProduct(this.productForm.value).then(res => {
+    //   this.snackBar.show(`You've added to the inventory.`, 'OK');
+    // });
   }
 }

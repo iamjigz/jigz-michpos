@@ -19,6 +19,8 @@ import { TableComponent } from './routes/inventory/table/table.component';
 import { InventoryComponent } from './routes/inventory/inventory.component';
 
 import { environment } from './../environments/environment';
+import { AddInventoryComponent } from './routes/inventory/add-inventory/add-inventory.component';
+import { ListInventoryComponent } from './routes/inventory/list-inventory/list-inventory.component';
 
 @NgModule({
   declarations: [
@@ -28,7 +30,9 @@ import { environment } from './../environments/environment';
     TableComponent,
     InventoryComponent,
     LoginComponent,
-    HomeComponent
+    HomeComponent,
+    AddInventoryComponent,
+    ListInventoryComponent
   ],
   imports: [
     BrowserModule,

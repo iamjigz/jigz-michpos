@@ -1,0 +1,73 @@
+<mat-accordion class="dashboard-card">
+  <mat-expansion-panel *ngFor="let p of products">
+    <mat-expansion-panel-header>
+      <mat-panel-title>
+        {{ p.name }}
+      </mat-panel-title>
+      <mat-panel-description>
+        {{ p.description }}
+      </mat-panel-description>
+    </mat-expansion-panel-header>
+
+    <form [formGroup]="form" fxLayout="column">
+      <mat-form-field>
+        <input
+          formControlName="distrib"
+          matInput
+          placeholder="Distributor"
+          [value]="p.distributor"
+          required
+        />
+      </mat-form-field>
+
+      <mat-form-field>
+        <input
+          formControlName="name"
+          matInput
+          placeholder="Name"
+          [value]="p.name"
+          required
+        />
+      </mat-form-field>
+
+      <mat-form-field>
+        <input
+          formControlName="desc"
+          matInput
+          placeholder="Description"
+          [value]="p.description"
+          required
+        />
+      </mat-form-field>
+
+      <mat-form-field>
+        <input
+          formControlName="qty"
+          type="number"
+          matInput
+          placeholder="Quantity"
+          [value]="p.qty"
+          required
+        />
+      </mat-form-field>
+
+      <p>FOR TESTING: {{ form.value.name }} -- {{ form.value.qty }}</p>
+    </form>
+
+    <mat-action-row fxLayoutGap="20px">
+      <button mat-raised-button color="warn">
+        Delete
+      </button>
+
+      <button
+        mat-raised-button
+        color="primary"
+        type="submit"
+        [disabled]="!form.valid"
+        (click)="update(p)"
+      >
+        Update
+      </button>
+    </mat-action-row>
+  </mat-expansion-panel>
+</mat-accordion>

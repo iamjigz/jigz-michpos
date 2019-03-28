@@ -5,37 +5,63 @@
     </mat-card-title>
   </mat-card-header>
   <mat-card-content class="dashboard-card-content">
-    <form [formGroup]="form" fxLayout="column">
-      <mat-form-field>
-        <input formControlName="name" matInput placeholder="Name" required />
-      </mat-form-field>
+    <form [formGroup]="form" fxLayout="column" fxLayoutGap="10px">
+      <div fxFlex fxLayout="column">
+        <mat-form-field>
+          <input formControlName="name" matInput placeholder="Name" required />
+        </mat-form-field>
 
-      <mat-form-field>
-        <input
-          formControlName="generic"
-          matInput
-          placeholder="Generic Name"
-          required
-        />
-      </mat-form-field>
+        <mat-form-field>
+          <input
+            formControlName="generic"
+            matInput
+            placeholder="Generic Name"
+            required
+          />
+        </mat-form-field>
 
-      <mat-form-field>
-        <input
-          formControlName="distributor"
-          matInput
-          placeholder="Distributor"
-          required
-        />
-      </mat-form-field>
+        <mat-form-field>
+          <input
+            formControlName="distributor"
+            matInput
+            placeholder="Distributor"
+            required
+          />
+        </mat-form-field>
 
-      <mat-form-field>
-        <input
-          formControlName="description"
-          matInput
-          placeholder="Description"
+        <mat-form-field>
+          <input
+            formControlName="description"
+            matInput
+            placeholder="Description"
+            required
+          />
+        </mat-form-field>
+      </div>
+
+      <mat-divider></mat-divider>
+
+      <div fxLayout fxLayoutAlign="start center" fxLayoutGap="20px">
+        <label id="branch-label">Branch:</label>
+        <mat-radio-group
+          fxLayout
+          fxLayoutAlign="start center"
+          fxLayoutGap="10px"
+          aria-label="Select branch"
+          formControlName="branch"
+          aria-labelledby="branch-label"
           required
-        />
-      </mat-form-field>
+        >
+          <mat-radio-button
+            *ngFor="let option of branchOptions"
+            [value]="option"
+          >
+            {{ option }}
+          </mat-radio-button>
+        </mat-radio-group>
+      </div>
+
+      <mat-divider [inset]="true"></mat-divider>
 
       <div fxLayout fxLayoutGap="10px">
         <mat-form-field fxFlex>

@@ -12,6 +12,7 @@ import { Product } from './../../../models/product';
 })
 export class ProductFormComponent implements OnInit {
   data: Product;
+  branchOptions: Array<any> = [];
   form;
 
   constructor(
@@ -21,8 +22,29 @@ export class ProductFormComponent implements OnInit {
     this.form = this.invService.productForm;
   }
 
-  ngOnInit() {}
+  ngOnInit() {
+    this.listBranches();
+  }
 
+  private listBranches() {
+    this.invService.getItems().subscribe(data => {
+      const items = data.map(e => {
+        return {
+          id: e.payload.doc.id,
+          ...e.payload.doc.data()
+        } as Product;
+      });
+
+      const options: Array<string> = items.reduce((prevValue, item: any) => {
+        return [...prevValue, ...item.branch];
+      }, []);
+      this.branchOptions = options.filter(this.onlyUnique); // get unique values
+    });
+  }
+
+  private onlyUnique(value, index, self) {
+    return self.indexOf(value) === index;
+  }
   addItem() {
     const data = this.form.value;
 

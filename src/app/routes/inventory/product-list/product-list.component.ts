@@ -1,6 +1,11 @@
 import { Component, OnInit, Inject } from '@angular/core';
 import { Observable } from 'rxjs';
-import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
+import {
+  MatDialog,
+  MatDialogRef,
+  MAT_DIALOG_DATA,
+  MatRadioChange
+} from '@angular/material';
 import { FormControl } from '@angular/forms';
 
 import { SnackbarService } from './../../../services/snackbar.service';
@@ -18,6 +23,7 @@ export class ProductListComponent implements OnInit {
   search = new FormControl();
   filteredOptions: Observable<string[]>;
   branchOptions: Array<any> = [];
+  selectedBranch = 'Main';
 
   constructor(
     public invService: InventoryService,
@@ -26,23 +32,28 @@ export class ProductListComponent implements OnInit {
   ) {}
 
   ngOnInit() {
-    this.branchItems('Main');
+    this.getItemsByBranch();
+    this.listBranches();
   }
 
   private listBranches() {
     this.invService.getItems().subscribe(data => {
-      const options: Array<string> = this.products.reduce(
-        (prevValue, item: any) => {
-          return [...prevValue, ...item.branch];
-        },
-        []
-      );
+      const items = data.map(e => {
+        return {
+          id: e.payload.doc.id,
+          ...e.payload.doc.data()
+        } as Product;
+      });
+
+      const options: Array<string> = items.reduce((prevValue, item: any) => {
+        return [...prevValue, ...item.branch];
+      }, []);
       this.branchOptions = options.filter(this.onlyUnique); // get unique values
     });
   }
 
-  private branchItems(branch: string) {
-    this.invService.getItemsByBranch(branch).subscribe(data => {
+  private getItemsByBranch() {
+    this.invService.getItemsByBranch(this.selectedBranch).subscribe(data => {
       this.products = data.map(e => {
         return {
           id: e.payload.doc.id,
@@ -66,6 +77,10 @@ export class ProductListComponent implements OnInit {
     dialogRef.afterClosed().subscribe(result => {
       console.log('The dialog was closed');
     });
+  }
+
+  onBranchChange($event: MatRadioChange) {
+    this.getItemsByBranch();
   }
 
   update(data: Product) {

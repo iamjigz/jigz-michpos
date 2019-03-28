@@ -25,7 +25,7 @@ export class InventoryService {
     expiry: ['', Validators.required],
     listPrice: ['', Validators.required],
     retailPrice: ['', Validators.required],
-    branch: ['Main', Validators.required]
+    branch: ['', Validators.required]
   });
 
   constructor(private fb: FormBuilder, private afs: AngularFirestore) {
@@ -42,7 +42,7 @@ export class InventoryService {
       .collection('inventory', ref =>
         ref.where('branch', '==', branch).orderBy('name')
       )
-      .valueChanges();
+      .snapshotChanges();
   }
 
   createItem(item: Product) {

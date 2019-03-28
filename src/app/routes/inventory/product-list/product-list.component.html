@@ -1,15 +1,4 @@
 <main fxLayout="column" fxLayoutGap="30px">
-  <mat-radio-group
-    fxLayout
-    fxLayoutAlign="start center"
-    fxLayoutGap="10px"
-    aria-label="Select branch"
-  >
-    <mat-radio-button *ngFor="let option of branchOptions" [value]="option">
-      {{ option }}
-    </mat-radio-button>
-  </mat-radio-group>
-
   <mat-form-field fxFlex>
     <input
       type="text"
@@ -18,6 +7,19 @@
       [matAutocomplete]="auto"
     />
   </mat-form-field>
+
+  <mat-radio-group
+    fxLayout
+    fxLayoutAlign="start center"
+    fxLayoutGap="10px"
+    aria-label="Select branch"
+    [(ngModel)]="selectedBranch"
+    (change)="onBranchChange($event)"
+  >
+    <mat-radio-button *ngFor="let option of branchOptions" [value]="option">
+      {{ option }}
+    </mat-radio-button>
+  </mat-radio-group>
 
   <mat-autocomplete fxFlex #auto="matAutocomplete">
     <mat-option *ngFor="let p of products" [value]="p.name">

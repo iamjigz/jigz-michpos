@@ -26,6 +26,7 @@ import {
   ProductListComponent,
   ProductListDialogComponent
 } from './routes/inventory/product-list/product-list.component';
+import { ProductFormComponent } from './routes/inventory/product-form/product-form.component';
 
 @NgModule({
   declarations: [
@@ -38,7 +39,8 @@ import {
     HomeComponent,
     ListInventoryComponent,
     ProductListComponent,
-    ProductListDialogComponent
+    ProductListDialogComponent,
+    ProductFormComponent
   ],
   imports: [
     BrowserModule,

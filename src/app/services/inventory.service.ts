@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { FormBuilder } from '@angular/forms';
+import { FormBuilder, Validators } from '@angular/forms';
 
 import {
   AngularFirestore,
@@ -17,10 +17,15 @@ export class InventoryService {
   private productCollection: AngularFirestoreCollection<Product>;
   products$: Observable<Product[]>;
   productForm = this.fb.group({
-    name: [''],
-    description: [''],
-    qty: [''],
-    distributor: ['']
+    name: ['', Validators.required],
+    generic: ['', Validators.required],
+    distributor: ['', Validators.required],
+    description: ['', Validators.required],
+    qty: ['', Validators.required],
+    expiry: ['', Validators.required],
+    listPrice: ['', Validators.required],
+    retailPrice: ['', Validators.required],
+    branch: ['Main', Validators.required]
   });
 
   constructor(private fb: FormBuilder, private afs: AngularFirestore) {
@@ -32,13 +37,10 @@ export class InventoryService {
     return this.productCollection.snapshotChanges();
   }
 
-  filterItems(search: string): Observable<any> {
+  getItemsByBranch(branch: string): Observable<any> {
     return this.afs
       .collection('inventory', ref =>
-        ref
-          .orderBy('name')
-          .startAt(search)
-          .endAt(search + '\uf8ff')
+        ref.where('branch', '==', branch).orderBy('name')
       )
       .valueChanges();
   }

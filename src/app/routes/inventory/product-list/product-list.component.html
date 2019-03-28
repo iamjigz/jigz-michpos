@@ -1,13 +1,29 @@
 <main fxLayout="column" fxLayoutGap="30px">
-  <div fxLayout fxLayoutGap="10px">
-    <button mat-raised-button color="primary" (click)="new()">
-      Add New
-    </button>
+  <mat-radio-group
+    fxLayout
+    fxLayoutAlign="start center"
+    fxLayoutGap="10px"
+    aria-label="Select branch"
+  >
+    <mat-radio-button *ngFor="let option of branchOptions" [value]="option">
+      {{ option }}
+    </mat-radio-button>
+  </mat-radio-group>
 
-    <mat-form-field fxFlex>
-      <input matInput placeholder="Search Items" />
-    </mat-form-field>
-  </div>
+  <mat-form-field fxFlex>
+    <input
+      type="text"
+      matInput
+      [formControl]="search"
+      [matAutocomplete]="auto"
+    />
+  </mat-form-field>
+
+  <mat-autocomplete fxFlex #auto="matAutocomplete">
+    <mat-option *ngFor="let p of products" [value]="p.name">
+      {{ p.name }}
+    </mat-option>
+  </mat-autocomplete>
 
   <mat-accordion class="dashboard-card">
     <mat-expansion-panel *ngFor="let p of products">
@@ -20,10 +36,11 @@
         </mat-panel-description>
       </mat-expansion-panel-header>
 
-      <section fxLayout fxLayoutAlign="space-between center">
+      <section fxLayout fxLayoutAlign="space-between end">
         <mat-list dense>
+          <h3 matSubheader>Branch: {{ p.branch }}</h3>
           <mat-list-item> Name: {{ p.name }} </mat-list-item>
-          <mat-list-item> Generic: {{ p.genericName }} </mat-list-item>
+          <mat-list-item> Generic: {{ p.generic }} </mat-list-item>
           <mat-list-item> Description: {{ p.description }} </mat-list-item>
           <mat-list-item> Distributor: {{ p.distributor }} </mat-list-item>
         </mat-list>
@@ -32,7 +49,9 @@
           <mat-list-item> Quantity: {{ p.qty }} </mat-list-item>
           <mat-list-item> List Price: {{ p.listPrice }} </mat-list-item>
           <mat-list-item> Retail Price: {{ p.retailPrice }} </mat-list-item>
-          <mat-list-item> Expiry: {{ p.expiry }} </mat-list-item>
+          <mat-list-item>
+            Expiry: {{ p.expiry.seconds * 1000 | date: 'MM-dd-yyyy' }}
+          </mat-list-item>
         </mat-list>
       </section>
 

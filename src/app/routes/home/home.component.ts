@@ -12,7 +12,7 @@ import { Product } from './../../models/product';
   styleUrls: ['./home.component.scss']
 })
 export class HomeComponent implements OnInit {
-  products$: Observable<Product[]>;
+  products$: Observable<any>;
   product: Product;
   constructor(
     public invService: InventoryService,
@@ -20,7 +20,7 @@ export class HomeComponent implements OnInit {
   ) {}
 
   ngOnInit() {
-    this.products$ = this.invService.listProducts();
+    this.products$ = this.invService.getItems();
   }
 
   onSubmit() {

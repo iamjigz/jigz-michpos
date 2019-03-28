@@ -4,7 +4,6 @@ import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
 
 import { AuthService } from './../../../services/auth.service';
-import { SnackbarService } from './../../../services/snackbar.service';
 import { User } from 'src/app/models/user';
 
 @Component({
@@ -28,8 +27,7 @@ export class NavComponent {
 
   constructor(
     private breakpointObserver: BreakpointObserver,
-    public auth: AuthService,
-    private snackBar: SnackbarService
+    public auth: AuthService
   ) {}
 
   logout() {

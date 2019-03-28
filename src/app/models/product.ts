@@ -3,13 +3,14 @@ export interface Product extends Item {
   distributor: string;
   listPrice: number;
   retailPrice: number;
-  expiry: Date;
-  timestamp?: Date;
+  timestamp: any;
+  branch: string;
 }
 
 export interface Item {
   id: string;
   name: string;
-  genericName?: string;
-  description?: string;
+  generic: string;
+  description: string;
+  expiry: any;
 }

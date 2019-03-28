@@ -2,7 +2,7 @@ export interface Product extends Item {
   qty: number;
   distributor: string;
   listPrice: number;
-  basePrice: number;
+  retailPrice: number;
   expiry: Date;
   timestamp?: Date;
 }

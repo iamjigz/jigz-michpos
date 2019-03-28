@@ -1,12 +1,21 @@
 <section class="content">
   <h1 class="mat-h1">Inventory</h1>
   <mat-grid-list cols="2" rowHeight="150px">
-    <mat-grid-tile colspan="2" rowspan="3">
-      <app-list-inventory></app-list-inventory>
+    <mat-grid-tile colspan="2" rowspan="5">
+      <mat-card class="dashboard-card">
+        <mat-card-header>
+          <mat-card-title>
+            Product List
+          </mat-card-title>
+        </mat-card-header>
+        <mat-card-content class="dashboard-card-content">
+          <app-product-list></app-product-list>
+        </mat-card-content>
+      </mat-card>
     </mat-grid-tile>
 
     <mat-grid-tile colspan="2" rowspan="3">
-      <app-add-inventory></app-add-inventory>
+      <app-list-inventory></app-list-inventory>
     </mat-grid-tile>
 
     <mat-grid-tile colspan="1" rowspan="2">

@@ -18,9 +18,9 @@ export class InventoryService {
   products$: Observable<Product[]>;
   productForm = this.fb.group({
     name: [''],
-    desc: [''],
+    description: [''],
     qty: [''],
-    distrib: ['']
+    distributor: ['']
   });
 
   constructor(private fb: FormBuilder, private afs: AngularFirestore) {
@@ -30,6 +30,17 @@ export class InventoryService {
 
   getItems() {
     return this.productCollection.snapshotChanges();
+  }
+
+  filterItems(search: string): Observable<any> {
+    return this.afs
+      .collection('inventory', ref =>
+        ref
+          .orderBy('name')
+          .startAt(search)
+          .endAt(search + '\uf8ff')
+      )
+      .valueChanges();
   }
 
   createItem(item: Product) {

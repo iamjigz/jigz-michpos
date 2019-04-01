@@ -142,4 +142,12 @@ export class ProductListDialogComponent {
   onNoClick(): void {
     this.dialogRef.close();
   }
+
+  formatDate(timestamp) {
+    return timestamp.toDate();
+  }
+
+  save(data) {
+    // TODO: patchValue
+  }
 }

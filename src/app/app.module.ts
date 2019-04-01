@@ -9,6 +9,8 @@ import { FirebaseModule } from './modules/firebase.module';
 import { FontawesomeModule } from './modules/fontawesome.module';
 import { AngularFireModule } from '@angular/fire';
 import { FlexLayoutModule } from '@angular/flex-layout';
+import { FlexModule } from '@angular/flex-layout/flex';
+import { GridModule } from '@angular/flex-layout/grid';
 
 import { AppComponent } from './app.component';
 import { LoginComponent } from './routes/login/login.component';
@@ -19,6 +21,12 @@ import { TableComponent } from './routes/inventory/table/table.component';
 import { InventoryComponent } from './routes/inventory/inventory.component';
 
 import { environment } from './../environments/environment';
+import { ListInventoryComponent } from './routes/inventory/list-inventory/list-inventory.component';
+import {
+  ProductListComponent,
+  ProductListDialogComponent
+} from './routes/inventory/product-list/product-list.component';
+import { ProductFormComponent } from './routes/inventory/product-form/product-form.component';
 
 @NgModule({
   declarations: [
@@ -28,7 +36,11 @@ import { environment } from './../environments/environment';
     TableComponent,
     InventoryComponent,
     LoginComponent,
-    HomeComponent
+    HomeComponent,
+    ListInventoryComponent,
+    ProductListComponent,
+    ProductListDialogComponent,
+    ProductFormComponent
   ],
   imports: [
     BrowserModule,
@@ -39,11 +51,14 @@ import { environment } from './../environments/environment';
     MaterialModule,
     FirebaseModule,
     FlexLayoutModule,
+    FlexModule,
+    GridModule,
     FontawesomeModule,
-    AngularFireModule.initializeApp(environment.firebase),
-    FontawesomeModule
+    FontawesomeModule,
+    AngularFireModule.initializeApp(environment.firebase)
   ],
   providers: [],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent],
+  entryComponents: [ProductListDialogComponent]
 })
 export class AppModule {}

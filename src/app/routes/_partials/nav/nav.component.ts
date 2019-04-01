@@ -4,7 +4,6 @@ import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
 
 import { AuthService } from './../../../services/auth.service';
-import { SnackbarService } from './../../../services/snackbar.service';
 import { User } from 'src/app/models/user';
 
 @Component({
@@ -13,10 +12,9 @@ import { User } from 'src/app/models/user';
   styleUrls: ['./nav.component.scss']
 })
 export class NavComponent {
-  title = `ST. ILLIAN's Pharmacy`;
+  title = `ST. ILIAN's Pharmacy`;
   sideMenu = [
     { path: '/', title: 'Home', icon: 'home' },
-    { path: '/profile', title: 'Profile', icon: 'account_circle' },
     { path: '/dashboard', title: 'Dashboard', icon: 'dashboard' },
     { path: '/reports', title: 'Reports', icon: 'assignment' },
     { path: '/transactions', title: 'Transactions', icon: 'list' },
@@ -29,8 +27,7 @@ export class NavComponent {
 
   constructor(
     private breakpointObserver: BreakpointObserver,
-    public auth: AuthService,
-    private snackBar: SnackbarService
+    public auth: AuthService
   ) {}
 
   logout() {

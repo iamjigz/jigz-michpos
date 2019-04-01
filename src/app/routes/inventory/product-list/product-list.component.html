@@ -1,0 +1,71 @@
+<main fxLayout="column" fxLayoutGap="30px">
+  <mat-form-field fxFlex>
+    <input
+      type="text"
+      matInput
+      [formControl]="search"
+      [matAutocomplete]="auto"
+    />
+  </mat-form-field>
+
+  <mat-radio-group
+    fxLayout
+    fxLayoutAlign="start center"
+    fxLayoutGap="10px"
+    aria-label="Select branch"
+    [(ngModel)]="selectedBranch"
+    (change)="onBranchChange($event)"
+  >
+    <mat-radio-button *ngFor="let option of branchOptions" [value]="option">
+      {{ option }}
+    </mat-radio-button>
+  </mat-radio-group>
+
+  <mat-autocomplete fxFlex #auto="matAutocomplete">
+    <mat-option *ngFor="let p of products" [value]="p.name">
+      {{ p.name }}
+    </mat-option>
+  </mat-autocomplete>
+
+  <mat-accordion class="dashboard-card">
+    <mat-expansion-panel *ngFor="let p of products">
+      <mat-expansion-panel-header>
+        <mat-panel-title>
+          {{ p.name }}
+        </mat-panel-title>
+        <mat-panel-description>
+          {{ p.distributor }}
+        </mat-panel-description>
+      </mat-expansion-panel-header>
+
+      <section fxLayout fxLayoutAlign="space-between end">
+        <mat-list dense>
+          <h3 matSubheader>Branch: {{ p.branch }}</h3>
+          <mat-list-item> Name: {{ p.name }} </mat-list-item>
+          <mat-list-item> Generic: {{ p.generic }} </mat-list-item>
+          <mat-list-item> Description: {{ p.description }} </mat-list-item>
+          <mat-list-item> Distributor: {{ p.distributor }} </mat-list-item>
+        </mat-list>
+
+        <mat-list dense>
+          <mat-list-item> Quantity: {{ p.qty }} </mat-list-item>
+          <mat-list-item> List Price: {{ p.listPrice }} </mat-list-item>
+          <mat-list-item> Retail Price: {{ p.retailPrice }} </mat-list-item>
+          <mat-list-item>
+            Expiry: {{ p.expiry.seconds * 1000 | date: 'MM-dd-yyyy' }}
+          </mat-list-item>
+        </mat-list>
+      </section>
+
+      <mat-action-row fxLayoutGap="20px">
+        <button mat-raised-button color="warn">
+          Delete
+        </button>
+
+        <button mat-raised-button color="primary" (click)="update(p)">
+          Update
+        </button>
+      </mat-action-row>
+    </mat-expansion-panel>
+  </mat-accordion>
+</main>

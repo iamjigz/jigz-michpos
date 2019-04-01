@@ -5,6 +5,11 @@ import { MatSidenavModule } from '@angular/material/sidenav';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { MatTableModule } from '@angular/material/table';
+import { MatDatepickerModule } from '@angular/material/datepicker';
+import {
+  MatDialogModule,
+  MAT_DIALOG_DEFAULT_OPTIONS
+} from '@angular/material/dialog';
 
 import {
   MatAutocompleteModule,
@@ -13,8 +18,6 @@ import {
   MatCardModule,
   MatCheckboxModule,
   MatChipsModule,
-  MatDatepickerModule,
-  MatDialogModule,
   MatExpansionModule,
   MatGridListModule,
   MatIconModule,
@@ -74,6 +77,9 @@ const modules = [
 
 @NgModule({
   imports: modules,
-  exports: modules
+  exports: modules,
+  providers: [
+    { provide: MAT_DIALOG_DEFAULT_OPTIONS, useValue: { hasBackdrop: false } }
+  ]
 })
 export class MaterialModule {}

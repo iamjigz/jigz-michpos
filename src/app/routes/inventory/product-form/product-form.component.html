@@ -1,0 +1,139 @@
+<mat-card class="dashboard-card">
+  <mat-card-header>
+    <mat-card-title>
+      New Product
+    </mat-card-title>
+  </mat-card-header>
+  <mat-card-content class="dashboard-card-content">
+    <form [formGroup]="form" fxLayout="column" fxLayoutGap="10px">
+      <div fxFlex fxLayout="column">
+        <mat-form-field>
+          <input formControlName="name" matInput placeholder="Name" required />
+        </mat-form-field>
+
+        <mat-form-field>
+          <input
+            formControlName="generic"
+            matInput
+            placeholder="Generic Name"
+            required
+          />
+        </mat-form-field>
+
+        <mat-form-field>
+          <input
+            formControlName="distributor"
+            matInput
+            placeholder="Distributor"
+            required
+          />
+        </mat-form-field>
+
+        <mat-form-field>
+          <input
+            formControlName="description"
+            matInput
+            placeholder="Description"
+            required
+          />
+        </mat-form-field>
+      </div>
+
+      <mat-divider></mat-divider>
+
+      <div fxLayout fxLayoutAlign="start center" fxLayoutGap="20px">
+        <label id="branch-label">Branch:</label>
+        <mat-radio-group
+          fxLayout
+          fxLayoutAlign="start center"
+          fxLayoutGap="10px"
+          aria-label="Select branch"
+          formControlName="branch"
+          aria-labelledby="branch-label"
+          required
+        >
+          <mat-radio-button
+            *ngFor="let option of branchOptions"
+            [value]="option"
+          >
+            {{ option }}
+          </mat-radio-button>
+        </mat-radio-group>
+      </div>
+
+      <mat-divider [inset]="true"></mat-divider>
+
+      <div fxLayout fxLayoutGap="10px">
+        <mat-form-field fxFlex>
+          <input
+            type="number"
+            formControlName="qty"
+            matInput
+            placeholder="Quantity"
+            required
+          />
+        </mat-form-field>
+
+        <mat-form-field fxFlex>
+          <input
+            matInput
+            [matDatepicker]="picker"
+            placeholder="Expiry Date"
+            formControlName="expiry"
+            required
+          />
+          <mat-datepicker-toggle
+            matSuffix
+            [for]="picker"
+          ></mat-datepicker-toggle>
+          <mat-datepicker #picker></mat-datepicker>
+        </mat-form-field>
+      </div>
+
+      <div fxLayout fxLayoutGap="10px">
+        <mat-form-field fxFlex>
+          <input
+            type="number"
+            formControlName="listPrice"
+            matInput
+            placeholder="List Price"
+            required
+          />
+          <span matPrefix>PHP&nbsp;</span>
+        </mat-form-field>
+
+        <mat-form-field fxFlex>
+          <input
+            type="number"
+            formControlName="retailPrice"
+            matInput
+            placeholder="Retail Price"
+            required
+          />
+          <span matPrefix>PHP&nbsp;</span>
+        </mat-form-field>
+      </div>
+    </form>
+  </mat-card-content>
+
+  <mat-card-actions fxLayout fxLayoutGap="10px">
+    <button fxFlex mat-raised-button color="accent">
+      Clear
+    </button>
+
+    <button
+      fxFlex
+      mat-raised-button
+      color="primary"
+      type="submit"
+      [disabled]="!form.valid"
+      (click)="addItem()"
+    >
+      Add
+    </button>
+  </mat-card-actions>
+
+  <mat-card-footer>
+    <!-- <mat-error *ngIf="form.invalid">{{  }}</mat-error> -->
+  </mat-card-footer>
+</mat-card>

@@ -5,30 +5,52 @@
       matInput
       [formControl]="search"
       [matAutocomplete]="auto"
+      placeholder="Enter product name"
     />
+    <button
+      mat-button
+      *ngIf="search.value"
+      matSuffix
+      mat-icon-button
+      aria-label="Clear"
+      (click)="clearSearch()"
+    >
+      <mat-icon>close</mat-icon>
+    </button>
   </mat-form-field>
 
-  <mat-radio-group
-    fxLayout
-    fxLayoutAlign="start center"
-    fxLayoutGap="10px"
-    aria-label="Select branch"
-    [(ngModel)]="selectedBranch"
-    (change)="onBranchChange($event)"
-  >
-    <mat-radio-button *ngFor="let option of branchOptions" [value]="option">
-      {{ option }}
-    </mat-radio-button>
-  </mat-radio-group>
+  <div fxLayout fxLayoutAlign="start center" fxLayoutGap="20px">
+    <label id="branch-label">Filter by Branch:</label>
+    <mat-radio-group
+      fxLayout
+      fxLayoutAlign="start center"
+      fxLayoutGap="10px"
+      aria-label="Select branch"
+      [(ngModel)]="selectedBranch"
+      (change)="filterByBranch()"
+      required
+    >
+      <mat-radio-button *ngFor="let option of branchOptions" [value]="option">
+        {{ option }}
+      </mat-radio-button>
+    </mat-radio-group>
+  </div>
 
-  <mat-autocomplete fxFlex #auto="matAutocomplete">
-    <mat-option *ngFor="let p of products" [value]="p.name">
-      {{ p.name }}
+  <mat-autocomplete
+    fxFlex
+    #auto="matAutocomplete"
+    (optionSelected)="selectItem($event)"
+  >
+    <mat-option
+      *ngFor="let option of (filteredOptions | async)"
+      [value]="option"
+    >
+      {{ option }}
     </mat-option>
   </mat-autocomplete>
 
   <mat-accordion class="dashboard-card">
-    <mat-expansion-panel *ngFor="let p of products">
+    <mat-expansion-panel *ngFor="let p of filteredProducts">
       <mat-expansion-panel-header>
         <mat-panel-title>
           {{ p.name }}

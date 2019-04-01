@@ -1,12 +1,14 @@
 import { Component, OnInit, Inject } from '@angular/core';
-import { Observable } from 'rxjs';
+import { FormControl } from '@angular/forms';
 import {
   MatDialog,
   MatDialogRef,
   MAT_DIALOG_DATA,
-  MatRadioChange
+  MatRadioChange,
+  MatAutocompleteSelectedEvent
 } from '@angular/material';
-import { FormControl } from '@angular/forms';
+import { Observable } from 'rxjs';
+import { map, startWith } from 'rxjs/operators';
 
 import { SnackbarService } from './../../../services/snackbar.service';
 import { InventoryService } from './../../../services/inventory.service';
@@ -18,9 +20,10 @@ import { Product } from './../../../models/product';
   styleUrls: ['./product-list.component.scss']
 })
 export class ProductListComponent implements OnInit {
-  products$: Observable<Product[]>;
   products: Product[];
-  search = new FormControl();
+  filteredProducts: Product[];
+  search = new FormControl('');
+  options: string[];
   filteredOptions: Observable<string[]>;
   branchOptions: Array<any> = [];
   selectedBranch = 'Main';
@@ -32,8 +35,13 @@ export class ProductListComponent implements OnInit {
   ) {}
 
   ngOnInit() {
-    this.getItemsByBranch();
+    this.filterByBranch();
     this.listBranches();
+
+    this.filteredOptions = this.search.valueChanges.pipe(
+      startWith(''),
+      map(value => this._filter(value))
+    );
   }
 
   private listBranches() {
@@ -52,19 +60,40 @@ export class ProductListComponent implements OnInit {
     });
   }
 
-  private getItemsByBranch() {
-    this.invService.getItemsByBranch(this.selectedBranch).subscribe(data => {
-      this.products = data.map(e => {
-        return {
-          id: e.payload.doc.id,
-          ...e.payload.doc.data()
-        } as Product;
-      });
+  private filterByBranch() {
+    this.invService.getItems().subscribe(data => {
+      this.products = this.filteredProducts = data
+        .map(e => {
+          return {
+            id: e.payload.doc.id,
+            ...e.payload.doc.data()
+          } as Product;
+        })
+        .filter(
+          option =>
+            option.branch.toLowerCase() === this.selectedBranch.toLowerCase()
+        );
     });
   }
 
   private onlyUnique(value, index, self) {
     return self.indexOf(value) === index;
+  }
+
+  private _filter(value: string): string[] {
+    const filterValue = value.toLowerCase();
+
+    if (this.products) {
+      this.options = this.products.reduce((prevValue, item: any) => {
+        return [...prevValue, ...item.name];
+      }, []);
+
+      return this.options.filter(option =>
+        option.toLowerCase().includes(filterValue)
+      );
+    }
+
+    return [];
   }
 
   openDialog(item: Product): void {
@@ -79,8 +108,15 @@ export class ProductListComponent implements OnInit {
     });
   }
 
-  onBranchChange($event: MatRadioChange) {
-    this.getItemsByBranch();
+  selectItem($event: MatAutocompleteSelectedEvent) {
+    this.filteredProducts = this.products.filter(
+      option => option.name.toLowerCase() === $event.option.value.toLowerCase()
+    );
+  }
+
+  clearSearch() {
+    this.search.setValue('');
+    this.filteredProducts = this.products;
   }
 
   update(data: Product) {

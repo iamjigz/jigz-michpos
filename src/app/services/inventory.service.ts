@@ -9,6 +9,7 @@ import {
 import { Observable } from 'rxjs';
 
 import { Product } from './../models/product';
+import { shareReplay } from 'rxjs/operators';
 
 @Injectable({
   providedIn: 'root'
@@ -16,6 +17,7 @@ import { Product } from './../models/product';
 export class InventoryService {
   private productCollection: AngularFirestoreCollection<Product>;
   products$: Observable<Product[]>;
+  products: Observable<any>;
   productForm = this.fb.group({
     name: ['', Validators.required],
     generic: ['', Validators.required],
@@ -29,21 +31,24 @@ export class InventoryService {
   });
 
   constructor(private fb: FormBuilder, private afs: AngularFirestore) {
-    this.productCollection = afs.collection<Product>('inventory');
-    this.products$ = this.productCollection.valueChanges();
+    this.productCollection = afs.collection('inventory');
+    this.products$ = this.productCollection.valueChanges().pipe(shareReplay(1));
+    this.products = this.productCollection
+      .snapshotChanges()
+      .pipe(shareReplay(1));
   }
 
   getItems() {
-    return this.productCollection.snapshotChanges();
+    return this.products;
   }
 
-  getItemsByBranch(branch: string): Observable<any> {
-    return this.afs
-      .collection('inventory', ref =>
-        ref.where('branch', '==', branch).orderBy('name')
-      )
-      .snapshotChanges();
-  }
+  // getItemsByBranch(branch: string): Observable<any> {
+  //   return this.afs
+  //     .collection('inventory', ref =>
+  //       ref.where('branch', '==', branch).orderBy('name')
+  //     )
+  //     .snapshotChanges();
+  // }
 
   createItem(item: Product) {
     return new Promise<any>((resolve, reject) => {

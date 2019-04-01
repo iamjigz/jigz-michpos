@@ -63,7 +63,7 @@ export class AuthService {
     this.afAuth.auth
       .signOut()
       .then(() => this.snackBar.show('You have been logged out!', 'OK'))
-      .then(() => this.route.navigate(['/']));
+      .then(() => this.route.navigate(['/login']));
   }
 
   private updateUserData(user) {

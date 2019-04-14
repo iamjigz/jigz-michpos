@@ -1,6 +1,5 @@
 import { Component, OnInit } from '@angular/core';
 import { Observable } from 'rxjs';
-import { FormGroup, FormControl } from '@angular/forms';
 
 import { SnackbarService } from './../../services/snackbar.service';
 import { InventoryService } from './../../services/inventory.service';

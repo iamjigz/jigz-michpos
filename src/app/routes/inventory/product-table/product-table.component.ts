@@ -1,7 +1,5 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
-import { MatPaginator } from "@angular/material/paginator";
-import { MatSort } from "@angular/material/sort";
-import { MatTableDataSource } from "@angular/material/table";
+import { MatSort, MatTableDataSource, MatPaginator } from '@angular/material';
 
 import { SnackbarService } from './../../../services/snackbar.service';
 import { InventoryService } from './../../../services/inventory.service';
@@ -13,21 +11,33 @@ import { Product } from './../../../models/product';
   styleUrls: ['./product-table.component.scss']
 })
 export class ProductTableComponent implements OnInit {
-  displayedColumns: string[] = ['name', 'generic', 'listPrice', 'retailPrice'];
+  displayedColumns: string[] = [
+    'branch',
+    'name',
+    'generic',
+    'listPrice',
+    'retailPrice',
+    'qty',
+    'expiry'
+  ];
   dataSource: MatTableDataSource<Product>;
 
-  @ViewChild(MatPaginator, { static: false }) paginator: MatPaginator;
-  @ViewChild(MatSort, { static: false }) sort: MatSort;
+  @ViewChild(MatPaginator) paginator: MatPaginator;
+  @ViewChild(MatSort) sort: MatSort;
 
   constructor(public invService: InventoryService) {
     this.invService.listItems().subscribe((data: Product[]) => {
+      console.log(data);
       this.dataSource = new MatTableDataSource(data);
-      this.dataSource.paginator = this.paginator;
-      this.dataSource.sort = this.sort;
     });
   }
 
-  ngOnInit() {}
+  ngOnInit() {
+    if (this.dataSource) {
+      this.dataSource.paginator = this.paginator;
+      this.dataSource.sort = this.sort;
+    }
+  }
 
   applyFilter(filterValue: string) {
     this.dataSource.filter = filterValue.trim().toLowerCase();

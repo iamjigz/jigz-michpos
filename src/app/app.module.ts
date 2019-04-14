@@ -20,7 +20,6 @@ import { HomeComponent } from './routes/home/home.component';
 import { DashboardComponent } from './routes/admin/dashboard/dashboard.component';
 import { NavComponent } from './routes/_partials/nav/nav.component';
 import { InventoryComponent } from './routes/inventory/inventory.component';
-
 import {
   ProductListComponent,
   ProductListDialogComponent

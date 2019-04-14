@@ -6,7 +6,7 @@ import { map, startWith } from 'rxjs/operators';
 import { SnackbarService } from './../../../services/snackbar.service';
 import { InventoryService } from './../../../services/inventory.service';
 import { Product } from './../../../models/product';
-import { MatAutocompleteSelectedEvent } from "@angular/material/autocomplete";
+import { MatAutocompleteSelectedEvent } from '@angular/material/autocomplete';
 
 @Component({
   selector: 'app-product-form',

@@ -27,7 +27,7 @@
       fxLayoutGap="10px"
       aria-label="Select branch"
       [(ngModel)]="selectedBranch"
-      (change)="filterByBranch()"
+      (change)="_filterByBranch()"
       required
     >
       <mat-radio-button *ngFor="let option of branchOptions" [value]="option">
@@ -71,8 +71,12 @@
 
         <mat-list dense>
           <mat-list-item> Quantity: {{ p.qty }} </mat-list-item>
-          <mat-list-item> List Price: {{ p.listPrice }} </mat-list-item>
-          <mat-list-item> Retail Price: {{ p.retailPrice }} </mat-list-item>
+          <mat-list-item>
+            List Price: {{ p.listPrice | currency: 'PHP':'symbol' }}
+          </mat-list-item>
+          <mat-list-item>
+            Retail Price: {{ p.retailPrice | currency: 'PHP':'symbol' }}
+          </mat-list-item>
           <mat-list-item>
             Expiry: {{ p.expiry.seconds * 1000 | date: 'MM-dd-yyyy' }}
           </mat-list-item>

@@ -6,7 +6,7 @@ import { map, startWith } from 'rxjs/operators';
 import { SnackbarService } from './../../../services/snackbar.service';
 import { InventoryService } from './../../../services/inventory.service';
 import { Product } from './../../../models/product';
-import { MatAutocompleteSelectedEvent } from '@angular/material';
+import { MatAutocompleteSelectedEvent } from "@angular/material/autocomplete";
 
 @Component({
   selector: 'app-product-form',
@@ -94,7 +94,6 @@ export class ProductFormComponent implements OnInit {
       option => option.name.toLowerCase() === $event.option.value.toLowerCase()
     );
 
-    console.log(this.filteredProducts);
     if (this.filteredProducts) {
       const data = this.filteredProducts[0];
 

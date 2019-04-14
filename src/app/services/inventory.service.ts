@@ -3,8 +3,8 @@ import { FormBuilder, Validators } from '@angular/forms';
 
 import {
   AngularFirestore,
-  AngularFirestoreDocument,
-  AngularFirestoreCollection
+  AngularFirestoreCollection,
+  DocumentChangeAction
 } from '@angular/fire/firestore';
 import { Observable } from 'rxjs';
 
@@ -33,13 +33,23 @@ export class InventoryService {
   constructor(private fb: FormBuilder, private afs: AngularFirestore) {
     this.productCollection = afs.collection('inventory');
     this.products$ = this.productCollection.valueChanges().pipe(shareReplay(1));
-    this.products = this.productCollection
-      .snapshotChanges()
-      .pipe(shareReplay(1));
+    this.products = this._setItems();
+    console.log(this.products);
+    console.log(this.products$);
   }
 
-  getItems() {
+  private _setItems(): Observable<Product | DocumentChangeAction<Product>[]> {
+    return this.productCollection.snapshotChanges().pipe(shareReplay(1));
+  }
+
+  getItems(): Observable<any> {
     return this.products;
+  }
+
+  listItems(): Observable<
+    Product | Product[] | DocumentChangeAction<Product>[]
+  > {
+    return this.productCollection.valueChanges().pipe(shareReplay(1));
   }
 
   // getItemsByBranch(branch: string): Observable<any> {
@@ -50,17 +60,18 @@ export class InventoryService {
   //     .snapshotChanges();
   // }
 
-  createItem(item: Product) {
+  createItem(item: Product): Promise<any> {
     return new Promise<any>((resolve, reject) => {
       this.productCollection.add(item).then(res => {}, err => reject(err));
+      this.products = this._setItems();
     });
   }
 
-  updateItem(item, update: Product) {
+  updateItem(item, update: Product): Promise<void> {
     return this.productCollection.doc(item.id).set(update, { merge: true });
   }
 
-  deleteItem(item) {
+  deleteItem(item): Promise<void> {
     return this.productCollection.doc(item.payload.doc.id).delete();
   }
 }

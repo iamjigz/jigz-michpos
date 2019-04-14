@@ -18,8 +18,17 @@
       </mat-card>
     </mat-grid-tile>
 
-    <mat-grid-tile colspan="2" rowspan="3">
-      <app-table></app-table>
+    <mat-grid-tile colspan="2" rowspan="5">
+      <mat-card class="dashboard-card">
+        <mat-card-header>
+          <mat-card-title>
+            Product Table
+          </mat-card-title>
+        </mat-card-header>
+        <mat-card-content class="dashboard-card-content">
+          <app-product-table></app-product-table>
+        </mat-card-content>
+      </mat-card>
     </mat-grid-tile>
   </mat-grid-list>
 </section>

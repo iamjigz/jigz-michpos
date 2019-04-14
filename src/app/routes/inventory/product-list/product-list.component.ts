@@ -1,12 +1,7 @@
 import { Component, OnInit, Inject } from '@angular/core';
 import { FormControl } from '@angular/forms';
-import {
-  MatDialog,
-  MatDialogRef,
-  MAT_DIALOG_DATA,
-  MatRadioChange,
-  MatAutocompleteSelectedEvent
-} from '@angular/material';
+import { MatAutocompleteSelectedEvent } from "@angular/material/autocomplete";
+import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from "@angular/material/dialog";
 import { Observable } from 'rxjs';
 import { map, startWith } from 'rxjs/operators';
 
@@ -35,8 +30,8 @@ export class ProductListComponent implements OnInit {
   ) {}
 
   ngOnInit() {
-    this.filterByBranch();
-    this.listBranches();
+    this._filterByBranch();
+    this._listBranches();
 
     this.filteredOptions = this.search.valueChanges.pipe(
       startWith(''),
@@ -44,7 +39,7 @@ export class ProductListComponent implements OnInit {
     );
   }
 
-  private listBranches() {
+  private _listBranches(): void {
     this.invService.getItems().subscribe(data => {
       const items = data.map(e => {
         return {
@@ -56,13 +51,13 @@ export class ProductListComponent implements OnInit {
       const options: Array<string> = items.reduce((prevValue, item: any) => {
         return [...prevValue, ...item.branch];
       }, []);
-      this.branchOptions = options.filter(this.onlyUnique); // get unique values
+      this.branchOptions = options.filter(this._onlyUnique); // get unique values
     });
   }
 
-  private filterByBranch() {
+  private _filterByBranch(): void {
     this.invService.getItems().subscribe(data => {
-      this.products = this.filteredProducts = data
+      return (this.products = this.filteredProducts = data
         .map(e => {
           return {
             id: e.payload.doc.id,
@@ -72,11 +67,11 @@ export class ProductListComponent implements OnInit {
         .filter(
           option =>
             option.branch.toLowerCase() === this.selectedBranch.toLowerCase()
-        );
+        ));
     });
   }
 
-  private onlyUnique(value, index, self) {
+  private _onlyUnique(value, index, self) {
     return self.indexOf(value) === index;
   }
 
@@ -108,19 +103,19 @@ export class ProductListComponent implements OnInit {
     });
   }
 
-  selectItem($event: MatAutocompleteSelectedEvent) {
+  selectItem($event: MatAutocompleteSelectedEvent): void {
     this.filteredProducts = this.products.filter(
       option => option.name.toLowerCase() === $event.option.value.toLowerCase()
     );
   }
 
-  clearSearch() {
+  clearSearch(): void {
     this.search.setValue('');
     this.filteredProducts = this.products;
   }
 
-  update(data: Product) {
-    this.openDialog(data);
+  update(data: Product): void {
+    return this.openDialog(data);
   }
 }
 
@@ -140,10 +135,10 @@ export class ProductListDialogComponent {
   }
 
   onNoClick(): void {
-    this.dialogRef.close();
+    return this.dialogRef.close();
   }
 
-  formatDate(timestamp) {
+  formatDate(timestamp): void {
     return timestamp.toDate();
   }
 

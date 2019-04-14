@@ -19,7 +19,6 @@ import { LoginComponent } from './routes/login/login.component';
 import { HomeComponent } from './routes/home/home.component';
 import { DashboardComponent } from './routes/admin/dashboard/dashboard.component';
 import { NavComponent } from './routes/_partials/nav/nav.component';
-import { TableComponent } from './routes/inventory/table/table.component';
 import { InventoryComponent } from './routes/inventory/inventory.component';
 
 import {
@@ -27,19 +26,20 @@ import {
   ProductListDialogComponent
 } from './routes/inventory/product-list/product-list.component';
 import { ProductFormComponent } from './routes/inventory/product-form/product-form.component';
+import { ProductTableComponent } from './routes/inventory/product-table/product-table.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     DashboardComponent,
     NavComponent,
-    TableComponent,
     InventoryComponent,
     LoginComponent,
     HomeComponent,
     ProductListComponent,
     ProductListDialogComponent,
-    ProductFormComponent
+    ProductFormComponent,
+    ProductTableComponent
   ],
   imports: [
     BrowserModule,

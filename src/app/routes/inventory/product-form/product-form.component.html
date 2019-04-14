@@ -8,8 +8,27 @@
     <form [formGroup]="form" fxLayout="column" fxLayoutGap="10px">
       <div fxFlex fxLayout="column">
         <mat-form-field>
-          <input formControlName="name" matInput placeholder="Name" required />
+          <input
+            formControlName="name"
+            matInput
+            placeholder="Name"
+            [matAutocomplete]="auto"
+            required
+          />
         </mat-form-field>
+
+        <mat-autocomplete
+          fxFlex
+          #auto="matAutocomplete"
+          (optionSelected)="selectItem($event)"
+        >
+          <mat-option
+            *ngFor="let option of (filteredOptions | async)"
+            [value]="option"
+          >
+            {{ option }}
+          </mat-option>
+        </mat-autocomplete>
 
         <mat-form-field>
           <input

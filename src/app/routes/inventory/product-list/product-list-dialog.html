@@ -1,62 +1,148 @@
-<h1 mat-dialog-title>{{ data.name }}</h1>
+<h1 mat-dialog-title>Updating {{ data.name }}</h1>
 <div mat-dialog-content>
-  <form [formGroup]="form" fxLayout="column">
-    <mat-form-field>
+  <form [formGroup]="form" fxLayout="column" fxLayoutGap="10px">
+    <div fxFlex fxLayout="column">
+      <mat-form-field>
+        <input
+          formControlName="name"
+          matInput
+          placeholder="Name"
+          required
+          [value]="data.name"
+        />
+      </mat-form-field>
+
+      <mat-form-field>
+        <input
+          formControlName="generic"
+          matInput
+          placeholder="Generic Name"
+          required
+          [value]="data.generic"
+        />
+      </mat-form-field>
+
+      <mat-form-field>
+        <input
+          formControlName="distributor"
+          matInput
+          placeholder="Distributor"
+          required
+          [value]="data.distributor"
+        />
+      </mat-form-field>
+
+      <mat-form-field>
+        <input
+          formControlName="description"
+          matInput
+          placeholder="Description"
+          required
+          [value]="data.description"
+        />
+      </mat-form-field>
+    </div>
+
+    <mat-divider></mat-divider>
+
+    <mat-form-field fxFlex>
       <input
-        formControlName="distrib"
+        formControlName="branch"
         matInput
-        placeholder="Distributor"
-        [value]="data.distributor"
+        placeholder="Branch"
         required
+        [value]="data.branch"
       />
     </mat-form-field>
 
-    <mat-form-field>
-      <input
-        formControlName="name"
-        matInput
-        placeholder="Name"
-        [value]="data.name"
-        required
-      />
-    </mat-form-field>
+    <!-- <div fxLayout fxLayoutAlign="start center" fxLayoutGap="20px">
+        <label id="branch-label">Branch:</label>
+        <mat-radio-group
+          fxLayout
+          fxLayoutAlign="start center"
+          fxLayoutGap="10px"
+          aria-label="Select branch"
+          formControlName="branch"
+          aria-labelledby="branch-label"
+          required [value]="data."
+        >
+          <mat-radio-button
+            *ngFor="let option of branchOptions"
+            [value]="option"
+          >
+            {{ option }}
+          </mat-radio-button>
+        </mat-radio-group>
+      </div> -->
 
-    <mat-form-field>
-      <input
-        formControlName="desc"
-        matInput
-        placeholder="Description"
-        [value]="data.description"
-        required
-      />
-    </mat-form-field>
+    <mat-divider [inset]="true"></mat-divider>
 
-    <mat-form-field>
-      <input
-        formControlName="qty"
-        type="number"
-        matInput
-        placeholder="Quantity"
-        [value]="data.qty"
-        required
-      />
-    </mat-form-field>
+    <div fxLayout fxLayoutGap="10px">
+      <mat-form-field fxFlex>
+        <input
+          type="number"
+          formControlName="qty"
+          matInput
+          placeholder="Quantity"
+          required
+          [value]="data.qty"
+        />
+      </mat-form-field>
+
+      <mat-form-field fxFlex>
+        <input
+          matInput
+          [matDatepicker]="picker"
+          placeholder="Expiry Date"
+          formControlName="expiry"
+          required
+          [value]="formatDate(data.expiry)"
+        />
+        <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+        <mat-datepicker #picker></mat-datepicker>
+      </mat-form-field>
+    </div>
+
+    <div fxLayout fxLayoutGap="10px">
+      <mat-form-field fxFlex>
+        <input
+          type="number"
+          formControlName="listPrice"
+          matInput
+          placeholder="List Price"
+          required
+          [value]="data.listPrice"
+        />
+        <span matPrefix>PHP&nbsp;</span>
+      </mat-form-field>
+
+      <mat-form-field fxFlex>
+        <input
+          type="number"
+          formControlName="retailPrice"
+          matInput
+          placeholder="Retail Price"
+          required
+          [value]="data.retailPrice"
+        />
+        <span matPrefix>PHP&nbsp;</span>
+      </mat-form-field>
+    </div>
   </form>
-</div>
 
-<div mat-dialog-actions>
-  <button mat-raised-button color="warn">
-    Delete
-  </button>
+  <div mat-dialog-actions>
+    <button mat-raised-button color="accent" (click)="onNoClick()">
+      Cancel
+    </button>
 
-  <button mat-raised-button color="accent" (click)="onNoClick()">Cancel</button>
-
-  <button
-    mat-raised-button
-    color="primary"
-    [mat-dialog-close]="data.qty"
-    cdkFocusInitial
-  >
-    Ok
-  </button>
+    <button
+      mat-raised-button
+      color="primary"
+      [mat-dialog-close]="save(data)"
+      cdkFocusInitial
+      [disabled]="!form.valid"
+    >
+      Save
+    </button>
+  </div>
 </div>

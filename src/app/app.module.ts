@@ -26,6 +26,8 @@ import {
 } from './routes/inventory/product-list/product-list.component';
 import { ProductFormComponent } from './routes/inventory/product-form/product-form.component';
 import { ProductTableComponent } from './routes/inventory/product-table/product-table.component';
+import { TransactionsComponent } from './routes/transactions/transactions.component';
+import { TransactionsTableComponent } from './routes/transactions/transactions-table/transactions-table.component';
 
 @NgModule({
   declarations: [
@@ -38,7 +40,9 @@ import { ProductTableComponent } from './routes/inventory/product-table/product-
     ProductListComponent,
     ProductListDialogComponent,
     ProductFormComponent,
-    ProductTableComponent
+    ProductTableComponent,
+    TransactionsComponent,
+    TransactionsTableComponent
   ],
   imports: [
     BrowserModule,

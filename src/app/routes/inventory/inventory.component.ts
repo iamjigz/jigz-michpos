@@ -6,10 +6,11 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./inventory.component.scss']
 })
 export class InventoryComponent implements OnInit {
-
-  constructor() { }
+  public show: boolean;
+  public text: string;
+  constructor() {}
 
   ngOnInit() {
+    this.show = false;
   }
-
 }

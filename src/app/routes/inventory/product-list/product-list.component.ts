@@ -87,7 +87,7 @@ export class ProductListComponent implements OnInit {
     });
   }
 
-  private _filterByBranch(): void {
+  public _filterByBranch(): void {
     this.invService.getItems().subscribe(data => {
       return (this.products = this.filteredProducts = data
         .map(e => {

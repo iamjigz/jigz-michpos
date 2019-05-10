@@ -14,6 +14,34 @@ import { InventoryService } from './../../../services/inventory.service';
 import { Product } from './../../../models/product';
 
 @Component({
+  selector: 'app-product-dialog',
+  templateUrl: 'product-list-dialog.html'
+})
+export class ProductListDialogComponent {
+  form;
+
+  constructor(
+    public invService: InventoryService,
+    public dialogRef: MatDialogRef<ProductListDialogComponent>,
+    @Inject(MAT_DIALOG_DATA) public data: Product
+  ) {
+    this.form = this.invService.productForm;
+  }
+
+  onNoClick(): void {
+    return this.dialogRef.close();
+  }
+
+  formatDate(timestamp): void {
+    return timestamp.toDate();
+  }
+
+  save(data) {
+    // TODO: patchValue
+  }
+}
+
+@Component({
   selector: 'app-product-list',
   templateUrl: './product-list.component.html',
   styleUrls: ['./product-list.component.scss']
@@ -59,7 +87,7 @@ export class ProductListComponent implements OnInit {
     });
   }
 
-  private _filterByBranch(): void {
+  public _filterByBranch(): void {
     this.invService.getItems().subscribe(data => {
       return (this.products = this.filteredProducts = data
         .map(e => {
@@ -120,33 +148,5 @@ export class ProductListComponent implements OnInit {
 
   update(data: Product): void {
     return this.openDialog(data);
-  }
-}
-
-@Component({
-  selector: 'app-product-dialog',
-  templateUrl: 'product-list-dialog.html'
-})
-export class ProductListDialogComponent {
-  form;
-
-  constructor(
-    public invService: InventoryService,
-    public dialogRef: MatDialogRef<ProductListDialogComponent>,
-    @Inject(MAT_DIALOG_DATA) public data: Product
-  ) {
-    this.form = this.invService.productForm;
-  }
-
-  onNoClick(): void {
-    return this.dialogRef.close();
-  }
-
-  formatDate(timestamp): void {
-    return timestamp.toDate();
-  }
-
-  save(data) {
-    // TODO: patchValue
   }
 }

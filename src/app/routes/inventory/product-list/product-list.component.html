@@ -41,23 +41,18 @@
     #auto="matAutocomplete"
     (optionSelected)="selectItem($event)"
   >
-    <mat-option
-      *ngFor="let option of (filteredOptions | async)"
-      [value]="option"
-    >
+    <mat-option *ngFor="let option of filteredOptions | async" [value]="option">
       {{ option }}
     </mat-option>
   </mat-autocomplete>
 
   <mat-accordion class="dashboard-card">
     <mat-expansion-panel *ngFor="let p of filteredProducts">
-      <mat-expansion-panel-header>
+      <mat-expansion-panel-header class="right-aligned-header">
         <mat-panel-title>
           {{ p.name }}
         </mat-panel-title>
-        <mat-panel-description>
-          {{ p.distributor }}
-        </mat-panel-description>
+        <mat-panel-description> QTY: {{ p.qty }} </mat-panel-description>
       </mat-expansion-panel-header>
 
       <section fxLayout fxLayoutAlign="space-between end">

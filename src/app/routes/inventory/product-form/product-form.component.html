@@ -23,7 +23,7 @@
           (optionSelected)="selectItem($event)"
         >
           <mat-option
-            *ngFor="let option of (filteredOptions | async)"
+            *ngFor="let option of filteredOptions | async"
             [value]="option"
           >
             {{ option }}
@@ -136,7 +136,7 @@
   </mat-card-content>
 
   <mat-card-actions fxLayout fxLayoutGap="10px">
-    <button fxFlex mat-raised-button color="accent">
+    <button fxFlex mat-raised-button color="accent" (click)="form.reset()">
       Clear
     </button>
 
